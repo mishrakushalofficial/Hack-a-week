@@ -1,0 +1,13 @@
+# Core
+numpy==1.24.3
+opencv-python==4.8.1.78
+Pillow==10.1.0
+matplotlib==3.7.3
+
+# ML (install only when needed)
+# tensorflow==2.13.0
+# albumentations==1.3.0
+# scikit-learn==1.3.0
+
+# UI (install only when needed)
+# streamlit==1.28.0
