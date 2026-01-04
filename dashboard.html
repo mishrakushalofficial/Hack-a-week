@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SmartPiggy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="dashboard.html" class="logo">
+                    <div class="logo-icon">🐷</div>
+                    <span class="logo-text">SmartPiggy</span>
+                </a>
+                <nav>
+                    <a href="#overview" style="color: var(--foreground);">Dashboard</a>
+                    <a href="#notes">Notes</a>
+                    <a href="#analytics">Analytics</a>
+                </nav>
+                <div class="user-menu">
+                    <button class="user-button" onclick="toggleUserMenu()">
+                        <div class="user-avatar">👤</div>
+                        <span id="user-name" style="font-weight: 500;">Demo User</span>
+                        <span>▼</span>
+                    </button>
+                    <div id="user-dropdown" class="dropdown-menu">
+                        <div class="dropdown-header">
+                            <div class="dropdown-name">Demo User</div>
+                            <div class="dropdown-email">demo@smartpiggy.com</div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item">👤 Profile</button>
+                        <button class="dropdown-item">⚙️ Settings</button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item danger" onclick="handleLogout()">🚪 Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="welcome-section">
+                <h1>Welcome back! 👋</h1>
+                <p style="color: var(--muted-foreground);">Here's your savings overview for today</p>
+            </div>
+
+            <div class="dashboard-stats">
+                <div class="dashboard-stat-card animate-slide-up">
+                    <div class="dashboard-stat-header">
+                        <div class="dashboard-stat-icon" style="background: linear-gradient(135deg, var(--primary), hsl(330, 81%, 60%))">💰</div>
+                        <span class="stat-change positive">+23%</span>
+                    </div>
+                    <h3 class="dashboard-stat-value">Rs.12,450</h3>
+                    <p class="dashboard-stat-subtitle">This Month Savings</p>
+                </div>
+                <div class="dashboard-stat-card animate-slide-up" style="animation-delay: 100ms;">
+                    <div class="dashboard-stat-header">
+                        <div class="dashboard-stat-icon" style="background: linear-gradient(135deg, var(--secondary), hsl(168, 76%, 42%))">🎯</div>
+                    </div>
+                    <h3 class="dashboard-stat-value">78%</h3>
+                    <p class="dashboard-stat-subtitle">Rs.15,000 target</p>
+                </div>
+                <div class="dashboard-stat-card animate-slide-up" style="animation-delay: 200ms;">
+                    <div class="dashboard-stat-header">
+                        <div class="dashboard-stat-icon" style="background: linear-gradient(135deg, hsl(25, 95%, 53%), hsl(45, 100%, 50%))">📅</div>
+                    </div>
+                    <h3 class="dashboard-stat-value">2 hours ago</h3>
+                    <p class="dashboard-stat-subtitle">+Rs.500 added</p>
+                </div>
+                <div class="dashboard-stat-card animate-slide-up" style="animation-delay: 300ms;">
+                    <div class="dashboard-stat-header">
+                        <div class="dashboard-stat-icon" style="background: linear-gradient(135deg, hsl(160, 84%, 39%), hsl(168, 76%, 42%))">⚡</div>
+                    </div>
+                    <h3 class="dashboard-stat-value">12 Days</h3>
+                    <p class="dashboard-stat-subtitle">Keep it up!</p>
+                </div>
+            </div>
+
+            <!-- Side by side layout: notes on left, graph on right -->
+            <div class="dashboard-grid-split">
+                <!-- Notes information card on the left -->
+                <div class="dashboard-card notes-info-card">
+                    <div class="card-header">
+                        <div class="card-icon">💵</div>
+                        <div>
+                            <div class="card-title">Note Breakdown</div>
+                            <div class="card-subtitle">113 notes total</div>
+                        </div>
+                    </div>
+                    <div class="notes-grid">
+                        <div class="note-card" style="border-left: 4px solid hsl(200, 100%, 50%);">
+                            <div class="note-card-header">
+                                <span style="font-size: 1.125rem; font-weight: 700; color: var(--foreground);">Rs.10</span>
+                            </div>
+                            <span style="font-size: 0.875rem; color: var(--muted-foreground);">15 notes</span>
+                        </div>
+                        <div class="note-card" style="border-left: 4px solid hsl(180, 100%, 50%);">
+                            <div class="note-card-header">
+                                <span style="font-size: 1.125rem; font-weight: 700; color: var(--foreground);">Rs.20</span>
+                            </div>
+                            <span style="font-size: 0.875rem; color: var(--muted-foreground);">30 notes</span>
+                        </div>
+                        <div class="note-card" style="border-left: 4px solid hsl(160, 100%, 40%);">
+                            <div class="note-card-header">
+                                <span style="font-size: 1.125rem; font-weight: 700; color: var(--foreground);">Rs.50</span>
+                            </div>
+                            <span style="font-size: 0.875rem; color: var(--muted-foreground);">18 notes</span>
+                        </div>
+                        <div class="note-card" style="border-left: 4px solid hsl(45, 100%, 50%);">
+                            <div class="note-card-header">
+                                <span style="font-size: 1.125rem; font-weight: 700; color: var(--foreground);">Rs.100</span>
+                            </div>
+                            <span style="font-size: 0.875rem; color: var(--muted-foreground);">25 notes</span>
+                        </div>
+                        <div class="note-card" style="border-left: 4px solid hsl(25, 100%, 50%);">
+                            <div class="note-card-header">
+                                <span style="font-size: 1.125rem; font-weight: 700; color: var(--foreground);">Rs.200</span>
+                            </div>
+                            <span style="font-size: 0.875rem; color: var(--muted-foreground);">8 notes</span>
+                        </div>
+                        <div class="note-card" style="border-left: 4px solid hsl(330, 100%, 60%);">
+                            <div class="note-card-header">
+                                <span style="font-size: 1.125rem; font-weight: 700; color: var(--foreground);">Rs.500</span>
+                            </div>
+                            <span style="font-size: 0.875rem; color: var(--muted-foreground);">12 notes</span>
+                        </div>
+                        <div class="note-card" style="border-left: 4px solid hsl(270, 100%, 60%);">
+                            <div class="note-card-header">
+                                <span style="font-size: 1.125rem; font-weight: 700; color: var(--foreground);">Rs.1000</span>
+                            </div>
+                            <span style="font-size: 0.875rem; color: var(--muted-foreground);">5 notes</span>
+                        </div>
+                    </div>
+                    <div class="total-value-compact">
+                        <span style="font-size: 0.875rem; color: var(--muted-foreground);">Total Value</span>
+                        <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">Rs.16,750</span>
+                    </div>
+                </div>
+
+                <!-- Graph card on the right -->
+                <div class="dashboard-card graph-card">
+                    <div class="card-header" style="justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div class="card-icon" style="background: linear-gradient(135deg, var(--secondary), hsl(168, 76%, 42%))">📊</div>
+                            <div>
+                                <div class="card-title">Note Breakdown</div>
+                                <div class="card-subtitle" id="graph-subtitle">Savings by Note Type</div>
+                            </div>
+                        </div>
+                        <!-- Savings/Expenses toggle -->
+                        <div class="graph-toggle-enhanced">
+                            <button class="toggle-btn-enhanced active" id="btn-savings" onclick="switchGraph('savings')">
+                                <span class="toggle-icon">📈</span>
+                                <span class="toggle-text">Savings</span>
+                            </button>
+                            <button class="toggle-btn-enhanced" id="btn-expenses" onclick="switchGraph('expenses')">
+                                <span class="toggle-icon">📉</span>
+                                <span class="toggle-text">Expenses</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Savings view -->
+                    <div id="savings-view">
+                        <div class="financial-summary">
+                            <div class="financial-summary-card savings">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <span>📈</span>
+                                    <span style="font-size: 0.875rem; color: var(--muted-foreground); font-weight: 500;" id="savings-month-label">July Savings</span>
+                                </div>
+                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--secondary);" id="savings-total">Rs.27,050</div>
+                                <div style="font-size: 0.75rem; color: var(--secondary); margin-top: 0.25rem;" id="savings-note-count">113 notes</div>
+                            </div>
+                            <div class="financial-summary-card" style="background: hsla(160, 84%, 39%, 0.05); border-color: hsla(160, 84%, 39%, 0.15);">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <span>💵</span>
+                                    <span style="font-size: 0.875rem; color: var(--muted-foreground); font-weight: 500;">Highest Note</span>
+                                </div>
+                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--secondary);" id="savings-highest">Rs.1000</div>
+                                <div style="font-size: 0.75rem; color: var(--muted-foreground); margin-top: 0.25rem;" id="savings-highest-count">5 notes</div>
+                            </div>
+                        </div>
+
+                        <div class="chart-wrapper">
+                            <div class="chart-title-row">
+                                <span style="font-size: 0.875rem; font-weight: 600; color: var(--foreground);">Amount by Note Type</span>
+                            </div>
+                            
+                            <div class="chart-with-axis">
+                                <div class="y-axis-scale">
+                                    <div class="y-axis-label">Rs.12k</div>
+                                    <div class="y-axis-label">Rs.10k</div>
+                                    <div class="y-axis-label">Rs.8k</div>
+                                    <div class="y-axis-label">Rs.6k</div>
+                                    <div class="y-axis-label">Rs.4k</div>
+                                    <div class="y-axis-label">Rs.2k</div>
+                                    <div class="y-axis-label">Rs.0</div>
+                                </div>
+                                <div class="single-bar-chart-enhanced" id="savings-note-chart">
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.450 (45 notes)" style="height: 5%; background: linear-gradient(135deg, hsl(200, 100%, 50%), hsl(200, 100%, 50%)dd); box-shadow: 0 4px 12px -4px hsl(200, 100%, 50%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.10</div>
+                                    </div>
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.600 (30 notes)" style="height: 5%; background: linear-gradient(135deg, hsl(180, 100%, 50%), hsl(180, 100%, 50%)dd); box-shadow: 0 4px 12px -4px hsl(180, 100%, 50%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.20</div>
+                                    </div>
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.900 (18 notes)" style="height: 7.5%; background: linear-gradient(135deg, hsl(160, 100%, 40%), hsl(160, 100%, 40%)dd); box-shadow: 0 4px 12px -4px hsl(160, 100%, 40%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.50</div>
+                                    </div>
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.2.5k (25 notes)" style="height: 20%; background: linear-gradient(135deg, hsl(45, 100%, 50%), hsl(45, 100%, 50%)dd); box-shadow: 0 4px 12px -4px hsl(45, 100%, 50%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.100</div>
+                                    </div>
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.1.6k (8 notes)" style="height: 13%; background: linear-gradient(135deg, hsl(25, 100%, 50%), hsl(25, 100%, 50%)dd); box-shadow: 0 4px 12px -4px hsl(25, 100%, 50%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.200</div>
+                                    </div>
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.6k (12 notes)" style="height: 50%; background: linear-gradient(135deg, hsl(330, 100%, 60%), hsl(330, 100%, 60%)dd); box-shadow: 0 4px 12px -4px hsl(330, 100%, 60%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.500</div>
+                                    </div>
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.5k (5 notes)" style="height: 42%; background: linear-gradient(135deg, hsl(270, 100%, 60%), hsl(270, 100%, 60%)dd); box-shadow: 0 4px 12px -4px hsl(270, 100%, 60%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.1000</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Color legend -->
+                            <div class="color-legend">
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(200, 100%, 50%);"></div>
+                                    <span>Rs.10</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(180, 100%, 50%);"></div>
+                                    <span>Rs.20</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(160, 100%, 40%);"></div>
+                                    <span>Rs.50</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(45, 100%, 50%);"></div>
+                                    <span>Rs.100</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(25, 100%, 50%);"></div>
+                                    <span>Rs.200</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(330, 100%, 60%);"></div>
+                                    <span>Rs.500</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(270, 100%, 60%);"></div>
+                                    <span>Rs.1000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Month selector -->
+                        <div class="month-selector-enhanced">
+                            <button class="month-btn-enhanced" onclick="selectMonth('savings', 0)">Jan</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('savings', 1)">Feb</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('savings', 2)">Mar</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('savings', 3)">Apr</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('savings', 4)">May</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('savings', 5)">Jun</button>
+                            <button class="month-btn-enhanced active" onclick="selectMonth('savings', 6)">Jul</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('savings', 7)">Aug</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('savings', 8)">Sep</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('savings', 9)">Oct</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('savings', 10)">Nov</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('savings', 11)">Dec</button>
+                        </div>
+                    </div>
+
+                    <!-- Expenses view -->
+                    <div id="expenses-view" class="hidden">
+                        <div class="financial-summary">
+                            <div class="financial-summary-card expenses">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <span>📉</span>
+                                    <span style="font-size: 0.875rem; color: var(--muted-foreground); font-weight: 500;" id="expenses-month-label">July Expenses</span>
+                                </div>
+                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--destructive);" id="expenses-total">Rs.10,100</div>
+                                <div style="font-size: 0.75rem; color: var(--destructive); margin-top: 0.25rem;" id="expenses-note-count">64 notes</div>
+                            </div>
+                            <div class="financial-summary-card" style="background: hsla(0, 72%, 51%, 0.05); border-color: hsla(0, 72%, 51%, 0.15);">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <span>💵</span>
+                                    <span style="font-size: 0.875rem; color: var(--muted-foreground); font-weight: 500;">Highest Note</span>
+                                </div>
+                                <div style="font-size: 1.75rem; font-weight: 700; color: var(--destructive);" id="expenses-highest">Rs.500</div>
+                                <div style="font-size: 0.75rem; color: var(--muted-foreground); margin-top: 0.25rem;" id="expenses-highest-count">8 notes</div>
+                            </div>
+                        </div>
+
+                        <div class="chart-wrapper">
+                            <div class="chart-title-row">
+                                <span style="font-size: 0.875rem; font-weight: 600; color: var(--foreground);">Amount by Note Type</span>
+                            </div>
+                            
+                            <div class="chart-with-axis">
+                                <div class="y-axis-scale">
+                                    <div class="y-axis-label">Rs.8k</div>
+                                    <div class="y-axis-label">Rs.7k</div>
+                                    <div class="y-axis-label">Rs.6k</div>
+                                    <div class="y-axis-label">Rs.5k</div>
+                                    <div class="y-axis-label">Rs.4k</div>
+                                    <div class="y-axis-label">Rs.2k</div>
+                                    <div class="y-axis-label">Rs.0</div>
+                                </div>
+                                <div class="single-bar-chart-enhanced" id="expenses-note-chart">
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.80 (8 notes)" style="height: 5%; background: linear-gradient(135deg, hsl(200, 100%, 50%), hsl(200, 100%, 50%)dd); box-shadow: 0 4px 12px -4px hsl(200, 100%, 50%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.10</div>
+                                    </div>
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.320 (16 notes)" style="height: 5%; background: linear-gradient(135deg, hsl(180, 100%, 50%), hsl(180, 100%, 50%)dd); box-shadow: 0 4px 12px -4px hsl(180, 100%, 50%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.20</div>
+                                    </div>
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.500 (10 notes)" style="height: 6%; background: linear-gradient(135deg, hsl(160, 100%, 40%), hsl(160, 100%, 40%)dd); box-shadow: 0 4px 12px -4px hsl(160, 100%, 40%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.50</div>
+                                    </div>
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.1.5k (15 notes)" style="height: 19%; background: linear-gradient(135deg, hsl(45, 100%, 50%), hsl(45, 100%, 50%)dd); box-shadow: 0 4px 12px -4px hsl(45, 100%, 50%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.100</div>
+                                    </div>
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.800 (4 notes)" style="height: 10%; background: linear-gradient(135deg, hsl(25, 100%, 50%), hsl(25, 100%, 50%)dd); box-shadow: 0 4px 12px -4px hsl(25, 100%, 50%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.200</div>
+                                    </div>
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.4k (8 notes)" style="height: 50%; background: linear-gradient(135deg, hsl(330, 100%, 60%), hsl(330, 100%, 60%)dd); box-shadow: 0 4px 12px -4px hsl(330, 100%, 60%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.500</div>
+                                    </div>
+                                    <div class="bar-group-enhanced">
+                                        <div class="single-bar-enhanced" data-value="Rs.3k (3 notes)" style="height: 37%; background: linear-gradient(135deg, hsl(270, 100%, 60%), hsl(270, 100%, 60%)dd); box-shadow: 0 4px 12px -4px hsl(270, 100%, 60%)80;"></div>
+                                        <div class="bar-label-enhanced">Rs.1000</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Color legend -->
+                            <div class="color-legend">
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(200, 100%, 50%);"></div>
+                                    <span>Rs.10</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(180, 100%, 50%);"></div>
+                                    <span>Rs.20</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(160, 100%, 40%);"></div>
+                                    <span>Rs.50</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(45, 100%, 50%);"></div>
+                                    <span>Rs.100</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(25, 100%, 50%);"></div>
+                                    <span>Rs.200</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(330, 100%, 60%);"></div>
+                                    <span>Rs.500</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: hsl(270, 100%, 60%);"></div>
+                                    <span>Rs.1000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Month selector for expenses -->
+                        <div class="month-selector-enhanced">
+                            <button class="month-btn-enhanced" onclick="selectMonth('expenses', 0)">Jan</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('expenses', 1)">Feb</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('expenses', 2)">Mar</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('expenses', 3)">Apr</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('expenses', 4)">May</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('expenses', 5)">Jun</button>
+                            <button class="month-btn-enhanced active" onclick="selectMonth('expenses', 6)">Jul</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('expenses', 7)">Aug</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('expenses', 8)">Sep</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('expenses', 9)">Oct</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('expenses', 10)">Nov</button>
+                            <button class="month-btn-enhanced" onclick="selectMonth('expenses', 11)">Dec</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
